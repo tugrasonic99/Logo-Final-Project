@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class NotificationListener {
+public class NotificationListener {// Bu sınıf TravelMainApp taraflı RabbitMQ'dan gelen mesajları dinlemek adına tasarlandı.
 	
 	@Autowired
 	private UserMailInboxRepository userMailInboxRepository;
@@ -29,6 +29,10 @@ public class NotificationListener {
 	
 	@RabbitListener(queues = "travel.notification")
 	public void notificationDListener(NotificationDTO notificationDto) throws Exception {// Exception queue'un boş olması durumunda tüm projeyi yakmaması adına koyulmuştur.
+		
+		
+		// Eğer NotificationDTO notificationType Email ise yeni kullanıcı adına bir email hesabı açar ve emaili kayıt eder.
+		
 		if(notificationDto.getNotificationType().equals("Email")) {
 			Email email=new Email();
 			email.setReceiver(notificationDto.getReceiver());
@@ -40,29 +44,24 @@ public class NotificationListener {
 			emails.add(email);
 			inbox.setReceivedEmails(emails);
 			userMailInboxRepository.save(inbox);
+			log.info("Email saved");
 			
 		}
+		
+		
 		
 		else if(notificationDto.getNotificationType().equals("Message")) {
 			Message message=new Message();
 			message.setReceiver(notificationDto.getReceiver());
 			message.setContext(notificationDto.getContext());
 			message.setSender(notificationDto.getSender());
-			if(userPhoneInboxRepository.existsByPhoneNumber(notificationDto.getReceiver())) {
-				UserPhoneInbox inbox=userPhoneInboxRepository.findByPhoneNumber(notificationDto.getReceiver()).get();
-				List<Message> messages=inbox.getReceivedMessages();
-				messages.add(message);
-				inbox.setReceivedMessages(messages);
-				userPhoneInboxRepository.save(inbox);
-				
-			}
-			
 			UserPhoneInbox inbox=new UserPhoneInbox();
 			inbox.setPhoneNumber(message.getReceiver());
 			List<Message> messages=new ArrayList<Message>();
 			messages.add(message);
 			inbox.setReceivedMessages(messages);
 			userPhoneInboxRepository.save(inbox);
+			log.info("Message saved");
 		}
 		
 	

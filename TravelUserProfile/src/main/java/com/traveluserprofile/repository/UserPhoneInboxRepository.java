@@ -13,6 +13,5 @@ public interface UserPhoneInboxRepository extends JpaRepository<UserPhoneInbox, 
 	
 	Optional<UserPhoneInbox> findByPhoneNumber(String phoneNumber);
 	
-	boolean existsByPhoneNumber(String phoneNumber);
 
 }

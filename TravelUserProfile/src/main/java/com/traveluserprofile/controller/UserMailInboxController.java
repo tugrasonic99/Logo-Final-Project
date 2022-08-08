@@ -14,14 +14,14 @@ import com.traveluserprofile.service.UserMailInboxService;
 
 @RestController
 @RequestMapping(value = "/usermail")
-public class UserMailInboxController {
+public class UserMailInboxController {// localhost:8080/usermail
 	
 	@Autowired
 	private UserMailInboxService userMailInboxService;
 	
 	
 	@GetMapping
-	public List<Email> userMails(@RequestBody NotificationHelper notificationHelper){
+	public List<Email> getMails(@RequestBody NotificationHelper notificationHelper){// Kullanıcı mailleri
 		return userMailInboxService.findMailboxByEmail(notificationHelper.getNotificationAddress());
 		
 	}

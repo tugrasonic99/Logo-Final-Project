@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Email {
+public class Email {// Email modeli. 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

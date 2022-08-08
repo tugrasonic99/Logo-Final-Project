@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-public class UserMailInbox {
+public class UserMailInbox {// Kullanıcı Mail kutusu. RabbitMQ tarafından gelecek kayıt mailleri için yaratılan entity.
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

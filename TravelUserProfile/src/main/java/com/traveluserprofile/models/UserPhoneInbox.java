@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class UserPhoneInbox {
+public class UserPhoneInbox {// Kullanıcı mesaj kutusu. Kullanıcıya ait bilet bilgilerin telefonlarına gittiği entity.
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

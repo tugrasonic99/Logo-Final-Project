@@ -15,14 +15,14 @@ import com.traveluserprofile.service.UserPhoneInboxService;
 
 @RestController
 @RequestMapping(value = "/userphone")
-public class UserPhoneInboxController {
+public class UserPhoneInboxController {// localhost:8080/userphone
 	
 	@Autowired
 	private UserPhoneInboxService userPhoneInboxService;
 	
 	
 	@GetMapping
-	public List<Message> getMessages(@RequestBody NotificationHelper notificationHelper){
+	public List<Message> getMessages(@RequestBody NotificationHelper notificationHelper){// Telefon mesajları
 		return userPhoneInboxService.findPhoneInboxByPhoneNumber(notificationHelper.getNotificationAddress());
 	}
 	
