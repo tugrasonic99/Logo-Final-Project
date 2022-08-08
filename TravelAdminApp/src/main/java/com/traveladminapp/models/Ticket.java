@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class Ticket {
+public class Ticket {// Bilet sınıfı hem seferden gelen yolculuk bilgilerini hem de bilet tarafından atanan yolcuları taşır.
 	
 	
 	@Id
@@ -19,7 +19,6 @@ public class Ticket {
 	private int id;
 	private int userId;
 	private int voyageId;
-	private String toFrom;
 	private String date;
 	private int price;
 	private String generalInfo;
@@ -45,12 +44,6 @@ public class Ticket {
 		this.voyageId = voyageId;
 	}
 
-	public String getToFrom() {
-		return toFrom;
-	}
-	public void setToFrom(String toFrom) {
-		this.toFrom = toFrom;
-	}
 	public String getDate() {
 		return date;
 	}

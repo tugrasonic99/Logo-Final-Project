@@ -10,13 +10,15 @@ import com.traveladminapp.models.AdminUser;
 import com.traveladminapp.repository.AdminUserRepository;
 
 @Service
-public class AdminUserService {
-	
+public class AdminUserService {// Admin kullanıcı servisi. Giriş ve yeni üye işlemleri burada yapılıyor.
+	// Hash işlemi SHA-256 ile yapıldı. 
 	
 	@Autowired
 	private AdminUserRepository adminUserRepository;
 	
 	
+	// Basit initializer. Eğer ilk veriyi bu fonksiyonla kaydetmek isterseniz buradaki ve controller'daki yorum satırlarını silin.
+    /*
 	public AdminUser initializeUser() {
 		AdminUser ad1=new AdminUser();
 		ad1.setEmail("abc@gmail.com");
@@ -34,16 +36,16 @@ public class AdminUserService {
 		ad2.setName("Admin1");
 		adminUserRepository.save(ad1);
 		return adminUserRepository.save(ad2);
-	}
+	}*/
 	
-	public AdminUser login(String name, String password) {
+	public AdminUser login(String name, String password) {// Giriş işlemi
 		String sha256hex = Hashing.sha256()
 				  .hashString(password, StandardCharsets.UTF_8)
 				  .toString();
 		return adminUserRepository.findByNameAndPassword(name, sha256hex);
 	}
 	
-	public AdminUser create(String name, String password, String email) {
+	public AdminUser create(String name, String password, String email) {// Yeni üye işlemi.
 		String sha256hex = Hashing.sha256()
 				  .hashString(password, StandardCharsets.UTF_8)
 				  .toString();
@@ -53,5 +55,6 @@ public class AdminUserService {
 		newUser.setPassword(sha256hex);
 		return adminUserRepository.save(newUser);
 	}
+	
 
 }

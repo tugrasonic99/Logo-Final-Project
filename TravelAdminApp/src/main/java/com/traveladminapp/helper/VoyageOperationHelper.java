@@ -1,6 +1,6 @@
 package com.traveladminapp.helper;
 
-public class VoyageOperationHelper {
+public class VoyageOperationHelper {// VoyageController'da Rest üzerinden sefer sorgularına yardımcı olmak için hazırlanan sınıf.
 	
 	private int id;
 	private String name;

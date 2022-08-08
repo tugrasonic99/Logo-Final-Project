@@ -3,7 +3,7 @@ package com.traveladminapp.helper;
 import com.traveladminapp.models.Vehicle;
 import com.traveladminapp.models.Voyage;
 
-public class CreateVoyageHelper {
+public class CreateVoyageHelper {// VoyageController'da Rest üzerinden sefer yaratımına yardımcı olmak için hazırlanan sınıf.
 	
 	private Voyage voyage;
 	private int vehicleType;

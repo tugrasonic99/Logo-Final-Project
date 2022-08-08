@@ -1,6 +1,6 @@
 package com.traveladminapp.helper;
 
-public class AdminUserHelper {
+public class AdminUserHelper {// AdminUserController'da Rest üzerinden AdminUser bilgisi göndermek amacıyla hazılanan sınıf.
 	
 	private String name;
 	private String password;

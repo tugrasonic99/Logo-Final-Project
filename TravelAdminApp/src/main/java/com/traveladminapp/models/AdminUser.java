@@ -6,7 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class AdminUser {
+public class AdminUser {// Admin kullanıcı, normal kullanıcıdan farklıdır.
+	// Admin sefer ekleyebilir, silebilir, toplam yolcu ve tutar bulabilir.
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -18,5 +18,7 @@ public interface VoyageRepository extends  JpaRepository<Voyage, Integer> {
 	
 	
 	List<Voyage> findByStartAndDestination(String start, String destination);
+	
+	
 
 }

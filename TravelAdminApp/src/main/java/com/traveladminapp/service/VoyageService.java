@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.hash.Hashing;
 import com.traveladminapp.enummodels.VehicleType;
+import com.traveladminapp.exception.QueryEmptyException;
 import com.traveladminapp.models.AdminUser;
 import com.traveladminapp.models.Ticket;
 import com.traveladminapp.models.Vehicle;
@@ -16,8 +17,11 @@ import com.traveladminapp.models.Voyage;
 import com.traveladminapp.repository.AdminUserRepository;
 import com.traveladminapp.repository.VoyageRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
-public class VoyageService {
+@Slf4j
+public class VoyageService {// Admin taraflı sefer servisi.
 	
 	
 	@Autowired
@@ -30,7 +34,8 @@ public class VoyageService {
 	public List<Voyage> findAllVoyages(){
 		return voyageRepository.findAll();
 	}
-	
+	// Basit initializer. Eğer ilk veriyi bu fonksiyonla kaydetmek isterseniz buradaki ve controller'daki yorum satırlarını silin.
+	/*
 	public Voyage initializeVoyage() {
 		Voyage newVoyage=new Voyage();
 		newVoyage.setDate("01-12-2022");
@@ -45,35 +50,30 @@ public class VoyageService {
 		newVoyage.setVehicle(v);
 		return voyageRepository.save(newVoyage);
 		
-	}
+	}*/
 	
-	public List<Voyage> findVoyageByDate(String date){
+	public List<Voyage> findVoyageByDate(String date){// Tarihe dayalı sefer bulma.
 		return voyageRepository.findByDate(date);
 	}
 	
-	public List<Voyage> findVoyageByLocations(String start, String destination){
+	public List<Voyage> findVoyageByLocations(String start, String destination){// Başlangıç-bitiş kullanarak sefer bulma.
 		return voyageRepository.findByStartAndDestination(start, destination);
 	}
 	
-	public Voyage createVoyage(Voyage voyage, int vehicleChoice,String name, String password) {
-		String sha256hex = Hashing.sha256()
-				  .hashString(password, StandardCharsets.UTF_8)
-				  .toString();
-	   if(adminUserRepository.findByNameAndPassword(name, sha256hex)==null) {
-		   return null;
-	   }
+	public Voyage createVoyage(Voyage voyage, int vehicleChoice) {// Sefer yaratılışı.
+		// Başlangıç-bitiş, tarih ve fiyat JSON ile verilmelidir.
 		
 		
-	   else if(vehicleChoice==1) {
+	   if(vehicleChoice==1) {// Eğer verilen sayı değeri 1 ise, uçak için bir obje hazırlayıp sefer kaydedilir.
 			Vehicle v=new Vehicle();
 			v.setVehicleType(VehicleType.AIRPLANE);
-			v.setCapacity(189);
-			v.setFilled(0);
+			v.setCapacity(189);// Uçak max kapasite
+			v.setFilled(0);// Yeni yaratım.
 			voyage.setVehicle(v);
 			voyage.setTickets(new ArrayList<Ticket>());
 			return voyageRepository.save(voyage);
 		}
-		else if(vehicleChoice==2) {
+		else if(vehicleChoice==2) {// Eğer verilen sayı değeri 2 ise, otobüs için bir obje hazırlayıp sefer kaydedilir.
 			Vehicle v=new Vehicle();
 			v.setVehicleType(VehicleType.BUS);
 			v.setCapacity(45);
@@ -82,43 +82,32 @@ public class VoyageService {
 			voyage.setTickets(new ArrayList<Ticket>());
 			return voyageRepository.save(voyage);
 		}
-		
+		log.info("Wrong input");
 	   return null;
 	}
 	
-	public void deleteVoyage(int id, String name, String password) {
-		String sha256hex = Hashing.sha256()
-				  .hashString(password, StandardCharsets.UTF_8)
-				  .toString();
-	   if(adminUserRepository.findByNameAndPassword(name, sha256hex)==null) {
-		   
-	   }
+	public void deleteVoyage(int id) {// Sefer silme
+		
 		voyageRepository.deleteById(id);
 	}
 	
-	public void findTicketAmount(int id, String name, String password) {
-		String sha256hex = Hashing.sha256()
-				  .hashString(password, StandardCharsets.UTF_8)
-				  .toString();
-	   if(adminUserRepository.findByNameAndPassword(name, sha256hex)==null) {
-		   
-	   }
-		Voyage voyage=voyageRepository.findById(id).get();
+	public int findTicketAmount(int id) {// Sefere dayalı bilet sayısını bulma(yolcu sayısı dahil değil).
+		
+		Voyage voyage=voyageRepository.findById(id).orElseThrow(() ->new QueryEmptyException("Empty Result"));
 		List<Ticket> ticketList=voyage.getTickets();
 		int size=ticketList.size();
-		System.out.println(size);
+		log.info("Total ticket amount is:"+size);
+		return size;
 	}
 	
-	public void findTotalCostOfVoyage(int id, String name, String password) {
-		String sha256hex = Hashing.sha256()
-				  .hashString(password, StandardCharsets.UTF_8)
-				  .toString();
-	   if(adminUserRepository.findByNameAndPassword(name, sha256hex)==null) {
-		   
-	   }
-		Voyage voyage=voyageRepository.findById(id).get();
+	public int findTotalCostOfVoyage(int id) {// Seferin toplam masrafını bulma.
+		
+		Voyage voyage=voyageRepository.findById(id).orElseThrow(() ->new QueryEmptyException("Empty Result"));
 		List<Ticket> ticketList=voyage.getTickets();
-		System.out.println(ticketList.stream().mapToInt(x->x.getPrice()).reduce(0,Integer::sum));
+		int cost=ticketList.stream().mapToInt(x->x.getPrice()).reduce(0,Integer::sum);
+		String costString=Integer.toString(cost);
+		log.info("Total cost is:"+costString);
+		return cost;
 
 }
 	

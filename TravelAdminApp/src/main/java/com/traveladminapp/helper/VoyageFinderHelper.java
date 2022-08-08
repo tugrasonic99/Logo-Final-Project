@@ -1,6 +1,6 @@
 package com.traveladminapp.helper;
 
-public class VoyageFinderHelper {
+public class VoyageFinderHelper {// VoyageController'da Rest üzerinden sefer aramakta kullandığımız işlemlerdeki değerlere yardımcı olmak için hazırlanan sınıf.
 	
 	private String to;
 	private String from;

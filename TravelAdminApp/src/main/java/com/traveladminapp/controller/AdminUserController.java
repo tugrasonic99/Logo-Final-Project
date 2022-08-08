@@ -12,20 +12,20 @@ import com.traveladminapp.service.AdminUserService;
 
 @RestController
 @RequestMapping(value = "/adminuser")
-public class AdminUserController {
+public class AdminUserController {// localhost:8080/adminuser
 	
 	@Autowired
 	private AdminUserService adminUserService;
 	
-	@PostMapping
+	/*@PostMapping
 	@RequestMapping(value = "/init")
 	public AdminUser initialize() {
 		return adminUserService.initializeUser();
-	}
+	}*/
 	
 	@PostMapping
 	@RequestMapping(value = "/login")
-	public AdminUser login(@RequestBody AdminUserHelper helper) {
+	public AdminUser login(@RequestBody AdminUserHelper helper) {// Admin girişi
 		
 		return adminUserService.login(helper.getName(),helper.getPassword());
 	}
@@ -33,8 +33,8 @@ public class AdminUserController {
 	
 	@PostMapping
 	@RequestMapping(value = "/register")
-	public AdminUser createUser(@RequestBody AdminUserHelper helper) {
-		return adminUserService.create(helper.getName(), helper.getPassword(), helper.getPassword());
+	public AdminUser createUser(@RequestBody AdminUserHelper helper) {// Admin kayıt.
+		return adminUserService.create(helper.getName(), helper.getPassword(), helper.getEmail());
 	}
 
 }
