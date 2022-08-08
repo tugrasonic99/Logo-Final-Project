@@ -18,7 +18,7 @@ import com.travelmainapp.enummodels.UserType;
 
 @Entity
 @Table(name="users") 
-public class User {
+public class User {// Kullanıcı sınıfı. Genel bilgilerin yanında kullanıcı tipi, ödeme metodu ve sahip olunan biletlere bakar.
 	
 	
 	@Id

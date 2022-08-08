@@ -16,7 +16,7 @@ import com.travelmainapp.service.UserService;
 
 @RestController
 @RequestMapping(value = "/mainuserpage")
-public class UserController {
+public class UserController {// localhost:8080/mainuserpage
 	
 	@Autowired
 	private UserService userService;
@@ -24,28 +24,28 @@ public class UserController {
 	
 	@PostMapping
 	@RequestMapping(value="/createuser")
-	public User createUser(@RequestBody User user) {
+	public User createUser(@RequestBody User user) {// Kullanıcı yarat.
 		return userService.createUser(user);
 		
 	}
 	
 	@GetMapping
 	@RequestMapping(value="/login")
-	public User login(@RequestBody UserHelper helper) {
+	public User login(@RequestBody UserHelper helper) {// login işlemi
 		return userService.login(helper.getEmail(), helper.getPassword());
 		
 	}
 	
 	@GetMapping
 	@RequestMapping(value="/usertickets")
-	public List<Ticket> userTickets(@RequestBody UserHelper helper) {
+	public List<Ticket> userTickets(@RequestBody UserHelper helper) {// Kullanıcıya ait biletler.
 		return userService.userTickets(helper.getEmail(), helper.getPassword());
 		
 	}
 	
 	@PostMapping
 	@RequestMapping(value="/changepayment")
-	public User changePaymentPlan(@RequestBody UserHelper helper) {
+	public User changePaymentPlan(@RequestBody UserHelper helper) {// Ödeme yöntemini değiştir.
 		return userService.setPaymentMethod(helper.getEmail(), helper.getPassword(), helper.getPaymentMethod());
 	}
 

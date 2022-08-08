@@ -2,7 +2,7 @@ package com.travelmainapp.helper;
 
 import com.travelmainapp.models.PaymentMethod;
 
-public class UserHelper {
+public class UserHelper {// UserController işlemleri için yardımcı metod.
 	private String email;
 	private String password;
 	private PaymentMethod paymentMethod;

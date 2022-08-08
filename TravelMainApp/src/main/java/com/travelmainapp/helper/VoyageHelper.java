@@ -2,7 +2,7 @@ package com.travelmainapp.helper;
 
 import com.travelmainapp.enummodels.VehicleType;
 
-public class VoyageHelper {
+public class VoyageHelper {// VoyageController işlemleri için yardımcı metod.
 	
 	private String to;
 	private String from;

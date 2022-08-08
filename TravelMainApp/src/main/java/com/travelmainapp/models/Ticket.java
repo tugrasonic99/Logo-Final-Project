@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import com.travelmainapp.models.Passenger;
 
 @Entity
-public class Ticket {
+public class Ticket {// Bilet sınıfı hem seferden gelen yolculuk bilgilerini hem de bilet tarafından atanan yolcuları taşır.
 	
 	
 	@Id

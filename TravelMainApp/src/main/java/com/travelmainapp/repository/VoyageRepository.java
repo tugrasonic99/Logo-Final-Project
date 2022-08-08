@@ -20,6 +20,8 @@ public interface VoyageRepository extends  JpaRepository<Voyage, Integer> {
 	
 	
 	
+	
+	
 
 
 

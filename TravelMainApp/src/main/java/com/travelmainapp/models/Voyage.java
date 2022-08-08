@@ -15,7 +15,7 @@ import com.travelmainapp.models.Ticket;
 import com.travelmainapp.models.Vehicle;
 
 @Entity
-public class Voyage {
+public class Voyage {// Sefer genel yolculuk bilgilerinin yanında kullanılan araç ve sefere bağlı bilet listesini içerir.
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;

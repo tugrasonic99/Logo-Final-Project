@@ -6,7 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Passenger {
+public class Passenger {// Bilet alınan yolculardır. Bilet içerisinde bilgileri verilir. Sadece isim ve cinsiyete sahiptirler. 
+	// Ödeme işlemi kullanıcı tarafından olacağından ödeme ile ilgili bilgi içermezler.
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

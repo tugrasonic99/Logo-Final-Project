@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import com.travelmainapp.enummodels.VehicleType;
 
 @Entity
-public class Vehicle {
+public class Vehicle {// Araç farklılıklarını gidermek adına yaratıldı.
 	
 	
 	@Id

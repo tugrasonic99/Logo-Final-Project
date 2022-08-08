@@ -1,9 +1,9 @@
 package com.travelmainapp.dto;
 
-public class NotificationDTO {
+public class NotificationDTO {// TravelUserProfile ile iletişime geçecek olan servis için mesajlaşma objesi.
 	
 	
-	private String notificationType;
+	private String notificationType;// Polifmorfik bir davranış ile bu obje hem mesaj hem de mail rolünü üstlenebilir.
 	private String sender;
 	private String context;
 	private String receiver;
