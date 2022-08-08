@@ -23,6 +23,7 @@ Servislerle ilgili bazı önemli notlar:
 - Exception sınıfları genel anlamda sadece BAD REQUEST adına tasarlanmış olup, genel anlamda diğer spesifik olası hatalarla genel Exception ilgilenmektedir.
 - TravelMainApp'de her ne kadar kullanılan Voyage sınıfları TravelAdminApp ile aynı olsa da, Ticket değerlerinin diğer kullanıcılara görünmemesi adına null değer verilmiştir.
 - Şifre Hash için SHA-256 kullanılmıştır. 
+- Bazı test sınıfları tam bitirilmediği için coverage bazılarında düşük çıktı. Gelecekte düzeltilmesi planlanıyor.
 
 Bunkar belirtildiğine göre genel projeden bahsedilebilir.
 
